@@ -1,1 +1,1 @@
-# My-study-projects
+# My-python-projects
