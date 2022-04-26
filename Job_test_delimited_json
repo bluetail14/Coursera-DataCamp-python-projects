@@ -1,0 +1,51 @@
+import json
+
+## passes the test but outputs an invalid json format
+
+base_currency = 'EUR' # to support different base currencies.
+
+# reformat the dictionary
+
+def clean(input_file):
+    dict2 = [
+        {"date": k1, "target_currency": k2, "exchange_rate": v2}
+        for k1, v1 in dict1.items()
+        for k2, v2 in v1.items()
+    ]
+    for d1 in dict2:
+        d2 = {"base_currency": base_currency}
+        d1.update(d2)
+
+    key_order= ["date", "base_currency", "target_currency", "exchange_rate"]
+    dict2 = [{k: dct[k] for k in key_order} for dct in dict2]
+    
+    return dict2
+    
+    # store the new version of the file            
+        with open(file_out, 'w') as f:
+            for d in dict2:
+                json.dump(d, f)
+                f.write('\n')
+
+
+# abstracts loading the file.
+def load_file(file_in):
+    with open(file_in, 'r') as f:
+    
+        return  json.load(f)
+
+# abstracts writing the file.
+def write_file(file_out, dict2):        
+    with open(file_out, 'w') as f:
+        for d in dict2:
+            json.dump(d, f)
+            f.write('\n')   
+'''
+class jsonWriter: 
+    def load_file(file_in):
+        with open(file_in, 'r') as f:        
+            return  json.load(f)
+'''
+
+#clean0("raw.json", "cleaned.json")
+#clean0("raw.json", "../test/data/cleaned.jsonl") 
